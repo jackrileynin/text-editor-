@@ -3,16 +3,21 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const workboxPlugin = require('workbox-webpack-plugin');
+
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
 
 module.exports = () => {
   return {
     mode: 'development',
+    
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js'
     },
+     
+    
+    
     output: {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
@@ -20,11 +25,13 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin( {
         template: './index.html',
-        title: 'Webpack Plugin'
+        title: 'editor',
       }),
       // TODO: Add and configure workbox plugins for a service worker and manifest file.
       new WebpackPwaManifest({
-        name: 'Webpack Plugin',
+        fingerprints: false,
+        inject: true,
+        name: 'Webpack PWA App',
         short_name: 'Webpack',
         description: 'Webpack Plugin',
         background_color: '#01579b',
@@ -32,7 +39,7 @@ module.exports = () => {
         start_url: '/',
         icons: [
           {
-            src: path.resolve('src/assets/icons/icon-512x512.png'),
+            src: path.resolve('./src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
@@ -42,11 +49,7 @@ module.exports = () => {
         swSrc: './src-sw.js',
         swDest: 'sw.js',
       }),
-      new workboxPlugin.GenerateSW({
-        swDest: 'sw.js',
-        clientsClaim: true,
-        skipWaiting: true,
-      }),
+     
         
 
       
@@ -58,7 +61,7 @@ module.exports = () => {
         {
 
         test: /\.css$/i,
-        use: [" style-loader", "css-loader"],
+        use: ["style-loader", "css-loader"],
       },
     
         {
@@ -67,7 +70,9 @@ module.exports = () => {
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties']
+              
             }
           }
         }

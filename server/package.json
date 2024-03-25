@@ -4,13 +4,26 @@
     "description": "",
     "main": "server.js",
     "scripts": {
-        "server": "nodemon server.js --ignore client"
+        "server": "nodemon server.js --ignore client",
+        "start": "node server/index.js",
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+        
+
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "idb": "^6.0.0",
+        "webpack": "^5.11.1",
+        "webpack-cli": "^4.2.0",
+        "webpack-dev-server": "^3.11.1",
+        "webpack-dev-middleware": "^4.0.2"
+
+
     },
     "devDependencies": {
         "nodemon": "^2.0.4"
