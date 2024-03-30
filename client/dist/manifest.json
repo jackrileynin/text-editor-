@@ -32,7 +32,7 @@
     }
   ],
   "name": "Webpack PWA App",
-  "short_name": "Webpack",
+  "short_name": "JATE",
   "orientation": "portrait",
   "display": "standalone",
   "start_url": "/",
