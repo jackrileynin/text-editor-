@@ -12,25 +12,26 @@ const initdb = async () =>
     },
   });
   //const db = await openDB('jate', 1); // use a instance of the db for each method 
-  initdb();// intalling the database before exporting the methods
-
+  ;// intalling the database before exporting the methods
+initdb();
 // TODO: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => {
-  db = await openDB('jate', 1);
-  const tx = db.transaction('jate', 'readwrite');
+   const jateDB = await openDB('jate', 1);
+  const tx = jateDB.transaction('jate', 'readwrite');
   const store = tx.objectStore('jate');
-  await store.put(content);
+  await store.put({id: 1, content: content})
   await tx.done;
   console.log('content added to the database');
 }
 
 // TODO: Add logic for a method that gets all the content from the database
 export const getDb = async () =>{
-  db = await openDB('jate', 1);
-const tx = db.transaction('jate', 'readonly');
-const store = tx.objectStore('jate');
-const data = await store.getAll();
-await tx.done;
-return data;
+  const jateDB = await openDB('jate', 1);
+  const tx = jateDB.transaction('jate', 'readonly');
+  const store = tx.objectStore('jate');
+  const data = await store.getAll();
+  await tx.done;
+  return data;
 }
+
  

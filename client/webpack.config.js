@@ -31,11 +31,12 @@ module.exports = () => {
         fingerprints: false,
         inject: true,
         name: 'Webpack PWA App',
-        short_name: 'Webpack',
+        short_name: 'JATE',
         description: 'Webpack Plugin',
         background_color: '#01579b',
         theme_color: '#01579b',
         start_url: '/',
+    
         icons: [
           {
             src: path.resolve('./src/images/logo.png'),
@@ -70,7 +71,7 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-transform-runtime', '@babel/plugin-proposal-class-properties']
+              plugins: ["@babel/plugin-proposal-object-rest-spread", '@babel/plugin-proposal-class-properties']
               
             }
           }
