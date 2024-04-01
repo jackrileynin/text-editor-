@@ -7,7 +7,7 @@ const { precacheAndRoute } = require('workbox-precaching/precacheAndRoute');
 
 precacheAndRoute(self.__WB_MANIFEST);
 
-const Cache = new CacheFirst({
+const Cache = new CacheFirst({                                 
   cacheName: 'page-cache',
   plugins: [
     new CacheableResponsePlugin({
@@ -18,22 +18,22 @@ const Cache = new CacheFirst({
     }),
   ],
 });
-
-warmStrategyCache({
+                        
+warmStrategyCache({                  
   urls: ['/index.html', '/'],
   strategy: Cache,
 });
 
 registerRoute(({ request }) => request.mode === 'navigate', Cache); // respond to navigation requests with the pageCache strategy
 
-// TODO: Implement asset caching
-registerRoute(  
-
+// TODO: Implement asset caching         
+ registerRoute( 
+ 
   ({ request }) => request.destination === 'image',
   new CacheFirst({
     cacheName: 'image-cache',
     plugins: [
-      new CacheableResponsePlugin({
+      new CacheableResponsePlugin({            
         statuses: [0, 200],
       }),
       new ExpirationPlugin({
@@ -41,7 +41,7 @@ registerRoute(
       }),
     ],
   })
-);
+);  //
 
 
  registerRoute(
@@ -72,7 +72,7 @@ registerRoute(
       }),
     ],
   })
-);  
+); 
 
 
 
